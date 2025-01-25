@@ -6,7 +6,7 @@ import 'package:get_storage/get_storage.dart';
 
 void main() async {
   await GetStorage.init();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,13 +20,13 @@ class MyApp extends StatelessWidget {
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
       theme: ThemeData(
-        primaryColor: Colors.teal,
+        primaryColor: Colors.blue,
         // Change the default primary color here
         scaffoldBackgroundColor: Colors.white,
-        buttonTheme: ButtonThemeData(buttonColor: Colors.teal),
+        buttonTheme: const ButtonThemeData(buttonColor: Colors.teal),
         // Button color based on the primary
         inputDecorationTheme: InputDecorationTheme(
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(15)),
             borderSide: BorderSide(color: Colors.blue),
           ),
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
             borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
           ),
           labelStyle: TextStyle(
-            color: Colors.blue.withOpacity(0.5)
+            color: Colors.blue.withValues()
           )
         ),
         // Accent color for widgets like FloatingActionButton, etc.

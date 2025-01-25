@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 
 class LoginController extends GetxController {
-  final passwordController = TextEditingController();
-  final emailController = TextEditingController();
+  final passwordController = TextEditingController(text: "123456t");
+  final emailController = TextEditingController(text: "tito@gmail.com");
 
   var isVisible = false.obs;
   var isEmailValid = true.obs;

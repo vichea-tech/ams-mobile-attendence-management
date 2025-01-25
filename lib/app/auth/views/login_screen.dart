@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Text(
                     "Attendance",
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(
                     height: 30,
