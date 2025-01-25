@@ -1,4 +1,5 @@
 import 'package:attendance_app/app/auth/controllers/login_controller.dart';
+import 'package:attendance_app/components/buttons/my_buttons.dart';
 import 'package:attendance_app/components/fields/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -61,6 +62,15 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  MyButton(
+                    onPressed: controller.login,
+                    text: 'Login',
+                    color: Colors.blue,
+                    heightButton: 50,
+                  )
                 ],
               ),
             ),

@@ -1,3 +1,4 @@
+import 'package:attendance_app/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -17,7 +18,7 @@ class LoginController extends GetxController {
     }
     if (!GetUtils.isEmail(value)) {
       isEmailValid.value = false;
-      return 'Enter a valid email';
+      return 'It is not email';
     }
     isEmailValid.value = true;
     return null;
@@ -39,14 +40,37 @@ class LoginController extends GetxController {
     isVisible.value = !isVisible.value;
   }
 
-  void submitForm() {
-    if (validateEmail(emailController.text) == null &&
-        validatePassword(emailController.text) == null) {
-      Get.snackbar('Success', 'Form submitted successfully!',
-          snackPosition: SnackPosition.BOTTOM);
+  void login() {
+    final emailError = validateEmail(emailController.text);
+    final passwordError = validatePassword(passwordController.text);
+
+    if (emailError == null && passwordError == null) {
+      Get.snackbar(
+        'Success',
+        'Form submitted successfully!',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      Get.offAllNamed(AppRoutes.scanAttendance);
     } else {
-      Get.snackbar('Error', 'Please fix the errors in the form',
-          snackPosition: SnackPosition.BOTTOM);
+      if (emailError != null) {
+        Get.snackbar(
+          'Error',
+          emailError,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } else if (passwordError != null) {
+        Get.snackbar(
+          'Error',
+          passwordError,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } else {
+        Get.snackbar(
+          'Error',
+          'Please input the required fields',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
     }
   }
 }
