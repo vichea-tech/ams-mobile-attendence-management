@@ -39,11 +39,14 @@ class MyApp extends StatelessWidget {
           )
         ),
         // Accent color for widgets like FloatingActionButton, etc.
-        appBarTheme: AppBarTheme(
-          backgroundColor:
-              Colors.teal, // Set AppBar to the same color as primaryColor
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.blue,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),
         ),
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           bodyLarge: TextStyle(color: Colors.black), // Customize text color
           bodyMedium: TextStyle(color: Colors.grey),
           bodySmall: TextStyle(color: Colors.white), // Title text in AppBar
@@ -53,15 +56,19 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.greenAccent,
         // Different color for Dark Mode
         scaffoldBackgroundColor: Colors.black,
-        buttonTheme: ButtonThemeData(buttonColor: Colors.green),
-        inputDecorationTheme: InputDecorationTheme(
+        buttonTheme: const ButtonThemeData(buttonColor: Colors.green),
+        inputDecorationTheme: const InputDecorationTheme(
           focusColor: Colors.green,
         ),
         // Accent color for dark mode
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.lightGreenAccent,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.lightBlue,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),
         ),
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           bodyLarge: TextStyle(color: Colors.white),
           bodyMedium: TextStyle(color: Colors.grey),
           bodySmall: TextStyle(color: Colors.white),
