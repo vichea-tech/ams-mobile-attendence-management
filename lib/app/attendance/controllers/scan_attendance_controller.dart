@@ -1,3 +1,4 @@
+import 'package:attendance_app/app/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -31,6 +32,10 @@ class ScanAttendanceController extends GetxController {
       await qrViewController!.toggleFlash();
       isFlashOn.value = !isFlashOn.value;
     }
+  }
+
+  void toProfile(){
+    Get.toNamed(AppRoutes.profile);
   }
 
   @override

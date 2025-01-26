@@ -67,7 +67,7 @@ class _ScanAttendanceViewState extends State<ScanAttendanceView>
                     ),
                   ),
                   InkWell(
-                    onTap: (){},
+                    onTap: controller.toProfile,
                     child: const CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.blue,
