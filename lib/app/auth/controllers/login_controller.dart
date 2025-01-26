@@ -8,6 +8,9 @@ class LoginController extends GetxController {
   final emailController = TextEditingController(text: "tito@gmail.com");
 
   var isVisible = false.obs;
+  var rememberMe = false.obs;
+  var isLoading = false.obs;
+  var errorMessage = ''.obs;
   var isEmailValid = true.obs;
   var isPassword = true.obs;
 
