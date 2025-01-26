@@ -36,32 +36,80 @@ class _ScanAttendanceViewState extends State<ScanAttendanceView>
     return Scaffold(
       body: Stack(
         children: [
-
           QRView(
             key: controller.qrKey,
             onQRViewCreated: controller.onQRViewCreated,
             overlay: QrScannerOverlayShape(
-                borderColor: Colors.blue,
-                borderRadius: 10,
-                borderLength: 30,
-                borderWidth: 10,
-                cutOutSize: 300
+              borderColor: Colors.blue,
+              borderRadius: 10,
+              borderLength: 30,
+              borderWidth: 10,
+              cutOutSize: 300,
             ),
           ),
-          const Positioned(
+          Positioned(
             top: 50,
             left: 0,
             right: 0,
-            child: Center(
-              child: Text(
-                'Scan QR Code',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Center(
+                    child: Text(
+                      'Scan QR Code',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: (){},
+                    child: const CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.blue,
+                      child: Image(
+                        image: AssetImage('./assets/images/itc_logo.png'),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
+          ),
+          Positioned(
+            top: Get.height * 0.8,
+            left: 0,
+            right: 0,
+            child: Obx(() {
+              return Column(
+                children: [
+                  Center(
+                    child: IconButton.outlined(
+                      iconSize: 30,
+                      onPressed: controller.toggleFlash,
+                      isSelected: controller.isFlashOn.value,
+                      icon: const Icon(
+                        Icons.flash_off,
+                        color: Colors.blue,
+                      ),
+                      selectedIcon: const Icon(Icons.flash_on),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text("Flash".tr),
+                  Obx(() => Text(
+                        'Scanned Result: ${controller.result.value}',
+                        style: const TextStyle(fontSize: 18),
+                      )),
+                ],
+              );
+            }),
           ),
           // Animated focus line
           Center(
@@ -71,12 +119,21 @@ class _ScanAttendanceViewState extends State<ScanAttendanceView>
                 return Transform.translate(
                   offset: Offset(
                     0,
-                      (300 - 10) * 0.5 * (_animation.value * 2 - 1),
+                    (300 - 10) * 0.5 * (_animation.value * 2 - 1),
                   ),
                   child: Container(
                     width: 300 - 20,
-                    height: 2,
-                    color: Colors.blue.withOpacity(0.7),
+                    height: 1,
+                    decoration: BoxDecoration(
+                        color: Colors.blueAccent,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.blue.shade100,
+                              blurRadius: 2,
+                              spreadRadius: 1,
+                              offset: const Offset(0, 2)),
+                        ],
+                        borderRadius: BorderRadius.circular(2)),
                   ),
                 );
               },
