@@ -1,11 +1,14 @@
+import 'package:attendance_app/api/constance_api.dart';
+import 'package:attendance_app/api/auth_provider.dart';
 import 'package:attendance_app/app/routes/app_routes.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 
-class LoginController extends GetxController {
-  final passwordController = TextEditingController(text: "123456t");
-  final emailController = TextEditingController(text: "tito@gmail.com");
+class AuthController extends GetxController {
+  final passwordController = TextEditingController(text: "teacher@123");
+  final emailController = TextEditingController(text: "teacher@gmail.com");
+
+  final _loginProvider = AuthProvider();
 
   var isVisible = false.obs;
   var rememberMe = false.obs;
@@ -32,7 +35,7 @@ class LoginController extends GetxController {
       isPassword.value = false;
       return 'Password is required'.tr;
     }
-    if (value.length < 6) {
+    if (value.length < 2) {
       return "Password must be at least 6 characters".tr;
     }
     isPassword.value = true;
@@ -43,17 +46,36 @@ class LoginController extends GetxController {
     isVisible.value = !isVisible.value;
   }
 
-  void login() {
+  Future<void> login() async {
     final emailError = validateEmail(emailController.text);
     final passwordError = validatePassword(passwordController.text);
 
     if (emailError == null && passwordError == null) {
-      Get.snackbar(
-        'Success',
-        'Form submitted successfully!',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-      Get.offAllNamed(AppRoutes.scanAttendance);
+      try {
+        isLoading.value = true;
+
+        final response = await _loginProvider.login(
+          email: emailController.text.trim(),
+          password: passwordController.text,
+        );
+
+        storage.write('token', response.accessToken);
+        storage.write('role', response.user!.role);
+        storage.write('userId', response.user!.id);
+        storage.write('name', response.user!.name);
+        storage.write('email', response.user!.email);
+
+        if (response.user!.role != 'teacher'){
+          Get.snackbar("Role: ${response.user!.role}", "This role not allowed");
+
+        }
+        Get.offAllNamed(AppRoutes.scanAttendance);
+      } catch (e) {
+        print(e);
+      } finally{
+        isLoading.value = false;
+      }
+
     } else {
       if (emailError != null) {
         Get.snackbar(
