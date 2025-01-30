@@ -1,8 +1,11 @@
+import 'package:attendance_app/app/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+  ProfileView({super.key});
+
+  final ProfileController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,10 @@ class ProfileView extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.edit, color: Colors.white,),
+            icon: const Icon(
+              Icons.edit,
+              color: Colors.white,
+            ),
             onPressed: () {
               // Navigate to edit profile screen
             },
@@ -38,9 +44,9 @@ class ProfileView extends StatelessWidget {
             const SizedBox(height: 16),
 
             // User Name
-            const Text(
-              'Mukti TA',
-              style: TextStyle(
+            Text(
+              controller.name,
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
@@ -48,9 +54,9 @@ class ProfileView extends StatelessWidget {
             const SizedBox(height: 8),
 
             // User Role
-            const Text(
-              'Teacher',
-              style: TextStyle(
+            Text(
+              controller.role,
+              style: const TextStyle(
                 fontSize: 16,
                 //color: Colors.grey,
               ),
@@ -102,7 +108,7 @@ class ProfileView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            _buildInfoItem(Icons.email, 'john.doe@school.com'),
+            _buildInfoItem(Icons.email, controller.email),
             _buildInfoItem(Icons.phone, '+123 456 7890'),
             _buildInfoItem(
                 Icons.location_on, '123 School Street, City, Country'),
@@ -112,8 +118,8 @@ class ProfileView extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  // Handle logout
+                onPressed: () async {
+                  await controller.logout();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,

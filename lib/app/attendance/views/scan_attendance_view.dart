@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:attendance_app/app/attendance/controllers/scan_attendance_controller.dart';
+import 'package:attendance_app/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
@@ -67,7 +68,9 @@ class _ScanAttendanceViewState extends State<ScanAttendanceView>
                     ),
                   ),
                   InkWell(
-                    onTap: controller.toProfile,
+                    onTap: (){
+                      Get.toNamed(AppRoutes.profile);
+                    },
                     child: const CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.blue,
@@ -103,10 +106,10 @@ class _ScanAttendanceViewState extends State<ScanAttendanceView>
                     height: 10,
                   ),
                   Text("Flash".tr),
-                  Obx(() => Text(
-                        'Scanned Result: ${controller.result.value}',
-                        style: const TextStyle(fontSize: 18),
-                      )),
+                  // Obx(() => Text(
+                  //       'Scanned Result: ${controller.result.value}',
+                  //       style: const TextStyle(fontSize: 18),
+                  //     )),
                 ],
               );
             }),
